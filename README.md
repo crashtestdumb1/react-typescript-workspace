@@ -12,6 +12,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 `yarn add eslint react-app-rewired eslint-plugin-react @terra-money/terra.js @terra-money/wallet-provider @typescript-eslint/eslint-plugin @typescript-eslint/parser recoil react-dom typescript-plugin-css-modules eslint-config-prettier eslint-plugin-prettier https-browserify lint-staged assert buffer cross-env crypto-browserify @types/react @types/react-dom os-browserify prettier process react-app-alias react-app-rewire-alias stream-browserify stream-http url webpack`
 
+## package.json
+
+## config-overrides.js
+
+
 ## Available Scripts
 
 In the project directory, you can run:
