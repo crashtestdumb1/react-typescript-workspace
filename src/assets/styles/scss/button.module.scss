@@ -6,12 +6,9 @@
   @media screen and (max-width: 30rem) {
    width: auto;
   }
- }
+}
  
 button {
-
-  .standard {
-    width: 100%;
     color: var(--button-standard-color);
     background-color: var(--button-standard-bg);
     border: none;
@@ -26,21 +23,23 @@ button {
         color: var(--button-special-color);
         margin-right: 1em;
     }
+}
+
+.standard {
+    @extend button;
+
     &-disable {
         background-color: var(--icon-disable);
         @extend .standard;
     }
-    &-create {
-        @extend .standard;
-        background-color: var(--button-create-bg);
-        svg {
-            color: var(--button-create-color);
-            margin-right: 1em;
-        }
-    }
-  }
 
-  .outline {
+    &-create {
+        color: var(--button-create-color);
+        background-color: var(--button-create-bg);
+    }
+}
+
+.outline {
     color: var(--button-standard-color);
     border: var(--button-special-bg) solid 0.35rem;
     padding: 0.5rem 1.6rem;
@@ -51,6 +50,7 @@ button {
         color: var(--button-special-bg);
         margin-right: 1em;
     }
+
     &-disable {
         border: var(--button-disable-bg) solid 0.35rem;
         @extend .outline;
@@ -59,9 +59,11 @@ button {
         border: var(--button-standard-bg) solid 0.35rem;
         @extend .outline;
     }
-  }
+}
 
-  .simple {
+
+.simple {
+    @extend button;
     color: var(--button-standard-color);
     border: none;
     padding: 0.5rem 1.6rem;
@@ -82,7 +84,8 @@ button {
     }
   }
 
-  .clear {
+.clear {
+    @extend button;
     display: flex;
     flex-direction: column;
     color: var(--theme-color);
@@ -108,5 +111,3 @@ button {
         padding-left: 0.4rem;
     }
   }
-
-}
