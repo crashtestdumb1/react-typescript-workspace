@@ -1,8 +1,8 @@
 import Button from "@components/button";
 
-const title: string = 'Test Button 1';
-
 export default function pageButton() {
+  const title: string = 'Test Button 1';
+
   return (
     <>
       <p>

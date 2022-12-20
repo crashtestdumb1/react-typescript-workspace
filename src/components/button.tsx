@@ -1,5 +1,3 @@
-const title: string = 'Test Button 1';
-
 export default function Button( title: any ) {
     return (
         <>

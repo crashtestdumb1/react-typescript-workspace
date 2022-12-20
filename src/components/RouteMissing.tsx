@@ -1,5 +1,5 @@
 import styles from '@scss/paper.module.scss';
-import { Flex, Box, Spacer } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 export default function InitiativesFeatured() {
   return (
