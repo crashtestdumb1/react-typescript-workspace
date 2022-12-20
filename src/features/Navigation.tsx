@@ -1,4 +1,4 @@
-import {  Flex, HStack , chakra, Heading } from '@chakra-ui/react';
+import {  Flex, HStack , chakra } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import Logo from '@images/logo.svg';
 import styles from "@scss/nav.module.scss";
