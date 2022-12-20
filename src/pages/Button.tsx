@@ -5,12 +5,10 @@ export default function pageButton() {
 
   return (
     <>
-      <p>
-        <code>
-          Buttons:
-          <Button title={title} />
-        </code>
-      </p>
+      <code>
+        Buttons:
+        <Button title={title} />
+      </code>
     </>
   );
 }
