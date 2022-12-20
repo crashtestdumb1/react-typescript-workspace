@@ -5,7 +5,7 @@ export default function Button( { title }: { title: string }) {
         <>
         <p>
             <code>
-            <button className="button">{title}</button>
+            <button className={styles.standard}>{title}</button>
             </code>
         </p>
         </>
