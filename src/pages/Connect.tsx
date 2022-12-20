@@ -1,9 +1,11 @@
+import Connect from '@components/terraStation/connect';
+
 export default function AppContent() {
   return (
     <>
       <p>
         <code>
-          Welcome
+          <Connect />
         </code>
       </p>
     </>
