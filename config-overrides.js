@@ -15,6 +15,7 @@ module.exports = function override(config) {
   alias({
     '@assets': 'src/assets',
     '@styles': 'src/assets/styles',
+    '@css': 'src/assets/styles/css',
     '@scss': 'src/assets/styles/scss',
     '@themes': 'src/assets/styles/themes',
     '@images': 'src/assets/images',
