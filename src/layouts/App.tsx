@@ -1,9 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
 import AppContent from '@pages/App';
 import styles from "@css/app.module.css";
 
-function App() {
+export default function AppLayout() {
   return (
     <div className={styles.App}>
       <header className={styles['App-header']}>
@@ -12,5 +10,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
