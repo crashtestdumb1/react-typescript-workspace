@@ -6,15 +6,31 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 1. [Typescript](https://www.typescriptlang.org/)
 1. [React-App-Rewired]
-1. [ESLint]
+1. [ESLint] + Prettier
+1. Chakra UI
+1. SaaS UI
+1. Google Font Material Symbols
 
-## YARN Statement
+
+## YARN EVERYTHING AT ONCE:
+
+```yarn add eslint react-app-rewired react-dom react-router react-router-dom eslint-plugin-react @terra-money/terra.js @terra-money/wallet-provider @typescript-eslint/eslint-plugin @typescript-eslint/parser recoil typescript-plugin-css-modules eslint-config-prettier eslint-plugin-prettier https-browserify lint-staged assert buffer cross-env crypto-browserify @types/react @types/react-dom os-browserify prettier process react-app-alias react-app-rewire-alias stream-browserify stream-http url webpack @babel/plugin-transform-react-jsx @babel/core @testing-library/dom react-dom @babel/plugin-syntax-flow @chakra-ui/react @saas-ui/react framer-motion @emotion/react @emotion/styled date-fns material-symbols```
+
+## YARN Core
 
 `yarn add eslint react-app-rewired react-dom react-router react-router-dom eslint-plugin-react @terra-money/terra.js @terra-money/wallet-provider @typescript-eslint/eslint-plugin @typescript-eslint/parser recoil typescript-plugin-css-modules eslint-config-prettier eslint-plugin-prettier https-browserify lint-staged assert buffer cross-env crypto-browserify @types/react @types/react-dom os-browserify prettier process react-app-alias react-app-rewire-alias stream-browserify stream-http url webpack @babel/plugin-transform-react-jsx @babel/core @testing-library/dom react-dom @babel/plugin-syntax-flow`
 
 ## Style Packages
 
 `yarn add @chakra-ui/react @saas-ui/react framer-motion @emotion/react @emotion/styled`
+
+## Symbols / Icons
+
+`yarn add material-symbols`
+
+## Utilities
+
+`yarn add date-fns`
 
 ## package.json
 
