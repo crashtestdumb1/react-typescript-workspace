@@ -1,4 +1,6 @@
-export default function Button( title: any ) {
+import styles from "@scss/button.module.scss";
+
+export default function Button( { title }: { title: string }) {
     return (
         <>
         <p>

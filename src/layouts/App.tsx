@@ -1,5 +1,5 @@
 import AppContent from '@pages/App';
-import styles from "@css/app.module.css";
+import styles from "@scss/app.module.scss";
 import Navigation from '@features/Navigation';
 import MainContainer from '@routes/Main';
 
