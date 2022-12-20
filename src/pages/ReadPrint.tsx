@@ -10,14 +10,22 @@ export const PATH_PROFILE_PFP_DEFAULT = 'https://y-foundry-dao.github.io/yfd-dap
 export const PATH_PROFILE_SUFFIX = '.json';
 export const PATH_PROFILE_PFP_SUFFIX = '.png';
 
+
+const dataState = atom({
+  key: 'dataState',
+  default: [],
+});
+
 const walletAddress = atom({
   key: 'walletAddress',
   default: ''
 })
 
-export default function PageProfile() {
+export default function PageReadPrint() {
   const setWalletAddress = useSetRecoilState(walletAddress);
   const connectedWallet = useConnectedWallet();
+  const setData = useSetRecoilState(dataState);
+  const data = useRecoilValue(dataState);
 
   useEffect(() => {
     if (connectedWallet !== undefined) {
@@ -31,15 +39,17 @@ export default function PageProfile() {
   console.log('profileUrl: ' + profileUrl);
   console.log('profilePfpUrl: ' + profilePfpUrl);
 
+  useEffect(() => {
+    fetch(profileUrl)
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+  }, [profileUrl, setData]);
+
   return (
     <div>
-      <h1>Profile</h1>
-      Profile URL: {profileUrl}
-      <br />
-      Profile PFP URL: {profilePfpUrl}
-      <br />
-      <img src={profilePfpUrl} className={styles.profileImage} alt="profile" />
-      <br />
+      <h1>Read File & Print It... </h1>
+      <h3>{profileUrl}</h3>
+      <h3>{profilePfpUrl}</h3>
     </div>
   );
 }

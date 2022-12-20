@@ -6,7 +6,7 @@ import Connect from '@pages/Connect';
 import NoMatch from '@pages/404';
 import PageProfile from '@pages/Profile';
 import Properties from '@pages/Properties';
-
+import ReadPrint from '@pages/ReadPrint';
 export default function MainRoutes() {
   return (
     <Routes>
@@ -15,6 +15,7 @@ export default function MainRoutes() {
       <Route path="/connect" element={<Connect />}></Route>
       <Route path="/profile" element={<PageProfile />}></Route>
       <Route path='/props' element={<Properties />}></Route>
+      <Route path='/readprint' element={<ReadPrint />}></Route>
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );

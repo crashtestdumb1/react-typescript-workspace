@@ -6,6 +6,11 @@ import 'material-symbols';
 
 const navLinks = [
   {
+    label: "ReadPrint",
+    icon: "read_more",
+    href: "/readprint"
+  },
+  {
     label: "Props",
     icon: "details",
     href: "/props"
