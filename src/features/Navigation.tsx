@@ -5,26 +5,36 @@ import styles from "@scss/nav.module.scss";
 import 'material-symbols';
 
 const navLinks = [
-    {
-        label: "Button",
-        icon: "push_pin",
-        href: "/button"
-    },
-    {
-        label: "Connect",
-        icon: "connect_without_contact",
-        href: "/connect"
-    },
-    {
-        label: "404",
-        icon: "cancel",
-        href: "/missing"
-    },
-    {
-        label: "Home",
-        icon: "home",
-        href: "/"
-    }
+  {
+    label: "Props",
+    icon: "details",
+    href: "/props"
+  },
+  {
+    label: "Profile",
+    icon: "person",
+    href: "/profile"
+  },
+  {
+    label: "Button",
+    icon: "push_pin",
+    href: "/button"
+  },
+  {
+    label: "Connect",
+    icon: "connect_without_contact",
+    href: "/connect"
+  },
+  {
+    label: "404",
+    icon: "cancel",
+    href: "/missing"
+  },
+  {
+    label: "Home",
+    icon: "home",
+    href: "/"
+  }
 ];
 
 export default function Navigation() {

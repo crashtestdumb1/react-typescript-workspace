@@ -1,5 +1,5 @@
 
-export default function AppContent() {
+export default function pageApp() {
   return (
     <>
     </>

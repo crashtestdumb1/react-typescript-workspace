@@ -2907,6 +2907,13 @@
     "@chakra-ui/styled-system" "^2.3.5"
     "@chakra-ui/theme-tools" "^2.0.13"
 
+"@saas-ui/web3@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@saas-ui/web3/-/web3-1.3.0.tgz#4eb6b4fc62af9c8f1b809e07f846a8972146ec06"
+  integrity sha512-rsYSMV+nVi/MY5rxfzVTpNmsAc0qwpZmbA9HjClr+jZM81QkRfCZGwEmuO1N8/w4w9Yav0RC1gz4wdA6p9W+Xw==
+  dependencies:
+    "@chakra-ui/utils" "^2.0.12"
+
 "@sinclair/typebox@^0.24.1":
   version "0.24.51"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.51.tgz#645f33fe4e02defe26f2f5c0410e1c094eac7f5f"

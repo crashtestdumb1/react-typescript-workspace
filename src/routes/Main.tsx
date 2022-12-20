@@ -4,6 +4,8 @@ import App from '@pages/App';
 import Button from '@pages/Button';
 import Connect from '@pages/Connect';
 import NoMatch from '@pages/404';
+import Profile from '@pages/Profile';
+import Properties from '@pages/Properties';
 
 export default function MainRoutes() {
   return (
@@ -11,6 +13,8 @@ export default function MainRoutes() {
       <Route path="/" element={<App />}></Route>
       <Route path="/button" element={<Button />}></Route>
       <Route path="/connect" element={<Connect />}></Route>
+      <Route path="/profile" element={<Profile />}></Route>
+      <Route path='/props' element={<Properties />}></Route>
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );
