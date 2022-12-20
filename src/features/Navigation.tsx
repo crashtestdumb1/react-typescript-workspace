@@ -29,19 +29,18 @@ const navLinks = [
 
 export default function Navigation() {
   return (
-    <chakra.header id="header">
+    <chakra.header id="header" className={styles.navHeader}>
       <Flex
-        w="100%"
-        px="6"
-        py="5"
         align="center"
-        justify="space-between"
+        justify={{ base: 'space-between', md: 'space-around' }}
       >
-        <img src={Logo} className={styles['Nav-logo']} alt="logo" />
+        <img src={Logo} className={styles.navLogo} alt="logo" />
         <HStack as="nav" spacing="5">
           {navLinks.map((item, i) => (
-            <Link key={i} to={item.href}>
-              <Heading fontSize={30} color={'green'} p={15}><i className="material-symbols-sharp">{item.icon}</i><br />{item.label}</Heading>
+            <Link key={i} className={styles.navLink} to={item.href}>
+              <i className="material-symbols-sharp">{item.icon}</i>
+              <br />
+              {item.label}
             </Link>
           ))}
         </HStack>
