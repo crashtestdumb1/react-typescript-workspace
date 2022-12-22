@@ -14,15 +14,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## YARN EVERYTHING AT ONCE:
 
-```yarn add eslint react-app-rewired react-dom react-router react-router-dom eslint-plugin-react @terra-money/terra.js @terra-money/wallet-provider @typescript-eslint/eslint-plugin @typescript-eslint/parser recoil typescript-plugin-css-modules eslint-config-prettier eslint-plugin-prettier https-browserify lint-staged assert buffer cross-env crypto-browserify @types/react @types/react-dom os-browserify prettier process react-app-alias react-app-rewire-alias stream-browserify stream-http url webpack @babel/plugin-transform-react-jsx @babel/core @testing-library/dom react-dom @babel/plugin-syntax-flow @chakra-ui/react @saas-ui/react framer-motion @emotion/react @emotion/styled date-fns material-symbols @saas-ui/web3```
+```yarn add eslint react-app-rewired react-dom react-router react-router-dom eslint-plugin-react @terra-money/terra.js @terra-money/wallet-provider @typescript-eslint/eslint-plugin @typescript-eslint/parser recoil typescript-plugin-css-modules eslint-config-prettier eslint-plugin-prettier https-browserify lint-staged assert buffer cross-env crypto-browserify @types/react @types/react-dom os-browserify prettier process react-app-alias react-app-rewire-alias stream-browserify stream-http url webpack @babel/plugin-transform-react-jsx @babel/core @testing-library/dom react-dom @babel/plugin-syntax-flow @chakra-ui/react @chakra-ui/system @saas-ui/react framer-motion @emotion/react @emotion/styled date-fns material-symbols @saas-ui/web3 axios```
 
 ## YARN Core
 
-`yarn add eslint react-app-rewired react-dom react-router react-router-dom eslint-plugin-react @terra-money/terra.js @terra-money/wallet-provider @typescript-eslint/eslint-plugin @typescript-eslint/parser recoil typescript-plugin-css-modules eslint-config-prettier eslint-plugin-prettier https-browserify lint-staged assert buffer cross-env crypto-browserify @types/react @types/react-dom os-browserify prettier process react-app-alias react-app-rewire-alias stream-browserify stream-http url webpack @babel/plugin-transform-react-jsx @babel/core @testing-library/dom react-dom @babel/plugin-syntax-flow`
+`yarn add eslint react-app-rewired react-dom react-router react-router-dom eslint-plugin-react @terra-money/terra.js @terra-money/wallet-provider @typescript-eslint/eslint-plugin @typescript-eslint/parser recoil typescript-plugin-css-modules eslint-config-prettier eslint-plugin-prettier https-browserify lint-staged assert buffer cross-env crypto-browserify @types/react @types/react-dom os-browserify prettier process react-app-alias react-app-rewire-alias stream-browserify stream-http url webpack @babel/plugin-transform-react-jsx @babel/core @testing-library/dom react-dom @babel/plugin-syntax-flow axios`
 
 ## Style Packages
 
-`yarn add @chakra-ui/react @saas-ui/react framer-motion @emotion/react @emotion/styled @saas-ui/web3`
+`yarn add @chakra-ui/react @chakra-ui/system @saas-ui/react framer-motion @emotion/react @emotion/styled @saas-ui/web3`
 
 ## Symbols / Icons
 

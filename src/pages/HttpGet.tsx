@@ -12,7 +12,6 @@ export const PATH_PROFILE_SUFFIX = '.json';
 export const PATH_PROFILE_PFP_SUFFIX = '.png';
 export const PATH_TEST = 'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/terra1upleyfx24jehpgfy9d79d9scps20ffuf6vy706.json';
 
-
 const dataState = atom({
   key: 'dataState',
   default: {},
@@ -23,9 +22,10 @@ const walletAddress = atom({
   default: ''
 })
 
-export default function PageReadPrint() {
+export default function PageHttpGet() {
   const setWalletAddress = useSetRecoilState(walletAddress);
   const connectedWallet = useConnectedWallet();
+  const [data, setData] = useRecoilState(dataState);
 
   useEffect(() => {
   
@@ -43,27 +43,26 @@ export default function PageReadPrint() {
   console.log('profileUrl: ' + profileUrl);
   console.log('profilePfpUrl: ' + profilePfpUrl);
 
-  
-  const getData: any = async () => {
-    const { data } = await axios.get(profileUrl);
-    return data
-  }
-
-  const [data, setData] = useRecoilState(dataState)
   useEffect(() => {
-    getData().then((res: any) => setData(res))
+    async function fetchData() {
+      try {
+        const response = await axios.get('https://my-api.com/endpoint', {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
   }, []);
 
-  console.log(data);
+  if (!data) {
+    return <p>Loading...</p>;
+  }
 
-  return (
-      <div>
-        <h1>Read File & Print It... </h1>
-        <div>
-          <ul>
+  return <p><h1>Http Get</h1></p>;
 
-        </ul>
-        </div>
-      </div>
-  );
 }

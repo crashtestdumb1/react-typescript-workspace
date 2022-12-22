@@ -1,6 +1,6 @@
 import Button from "@components/button";
 
-export default function pageButton() {
+export default function pageRecoil() {
   const title: string = 'Test Button 1';
   const btnTitle: string = 'Reactive Button';
   function handleClick() {

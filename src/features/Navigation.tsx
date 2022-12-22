@@ -6,9 +6,29 @@ import 'material-symbols';
 
 const navLinks = [
   {
+    label: "State",
+    icon: "hourglass_empty",
+    href: "/state"
+  },  
+  {
+    label: "Recoil",
+    icon: "move_down",
+    href: "/recoil"
+  },  
+  {
     label: "ReadPrint",
     icon: "read_more",
     href: "/readprint"
+  },
+  {
+    label: "HTTP Get",
+    icon: "web",
+    href: "/http-get"
+  },
+  {
+    label: "Array",
+    icon: "list",
+    href: "/array"
   },
   {
     label: "Props",
