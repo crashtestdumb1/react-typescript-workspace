@@ -3,6 +3,7 @@ import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 import React, { useEffect } from 'react';
 import styles from '@scss/app.module.scss';
 import axios from 'axios'
+import { arrayBuffer } from 'node:stream/consumers';
 
 export const PATH_PROFILE =
   'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/';
@@ -46,12 +47,17 @@ export default function PageHttpGet() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('https://my-api.com/endpoint', {
+        const response = await axios.get(profileUrl, {
           headers: {
             'Content-Type': 'application/json',
           },
         });
-        setData(response.data);
+        if(response.data.profile) {
+          console.dir('response.data.profile: ' + JSON.stringify(response.data.profile));
+          setData(response.data.profile);
+        } else {
+          console.error('profile data missing');
+        }
       } catch (error) {
         console.error(error);
       }
@@ -60,9 +66,19 @@ export default function PageHttpGet() {
   }, []);
 
   if (!data) {
-    return <p>Loading...</p>;
+    return <p>Loading or File Missing...</p>;
   }
 
-  return <p><h1>Http Get</h1></p>;
+  return (
+    <div>
+      <h1>Fetched Profile Data</h1>
+      {data && (
+        <p>
+          {JSON.stringify(data)}
+          <br />
+        </p>
+      )}
+    </div>
+  );
 
 }
