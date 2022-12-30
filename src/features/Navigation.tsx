@@ -16,14 +16,14 @@ const navLinks = [
     href: "/recoil"
   },  
   {
-    label: "ReadPrint",
-    icon: "read_more",
-    href: "/readprint"
+    label: "Form",
+    icon: "edit_note",
+    href: "/form"
   },
   {
-    label: "HTTP Get",
+    label: "Fetch",
     icon: "web",
-    href: "/http-get"
+    href: "/fetch"
   },
   {
     label: "Array",
