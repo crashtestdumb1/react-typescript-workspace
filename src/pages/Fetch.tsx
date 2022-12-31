@@ -40,9 +40,7 @@ const initialFetchJson: FetchJson = {
 
 export default function PageHttpGet() {
   const [fetchJson, setFetchJson] = useState<FetchJson>(initialFetchJson);
-  const [error, setError] = useState(null);
 
-  const setWalletAddress = useSetRecoilState(walletAddress);
   const connectedWallet = useConnectedWallet();
 
   console.log('connectedWallet: ' + connectedWallet);

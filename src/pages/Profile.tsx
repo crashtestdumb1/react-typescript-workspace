@@ -1,14 +1,9 @@
-import { useConnectedWallet } from '@terra-money/wallet-provider';
 import { atom, useSetRecoilState, useRecoilState } from 'recoil';
 import { useEffect } from 'react';
 import styles from '@scss/app.module.scss';
 import axios from 'axios'
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
-
-const walletAddress = atom({
-  key: 'walletAddress',
-  default: ''
-})
+import useWallet from '@hooks/useWallet';
 
 type Profile = {
   name: string;
@@ -48,18 +43,8 @@ const profileState = atom<Profile>({
 
 export default function PageHttpGet() {
   const [profile, setProfile] = useRecoilState(profileState);
-  const setWalletAddress = useSetRecoilState(walletAddress);
-  const connectedWallet = useConnectedWallet();
+  const address = useWallet();
 
-  console.log('connectedWallet: ' + JSON.stringify(connectedWallet));
-  useEffect(() => {
-  
-    if (connectedWallet !== undefined) {
-      setWalletAddress(connectedWallet?.walletAddress);
-    }
-  }, [connectedWallet, setWalletAddress]);
-
-  const address = connectedWallet?.walletAddress;
   const profileUrl = PATH_PROFILE + address + PATH_PROFILE_SUFFIX;
   const profilePfpUrl = PATH_PROFILE_PFP + address + PATH_PROFILE_PFP_SUFFIX;
   console.log('profileUrl: ' + profileUrl);
@@ -90,7 +75,7 @@ export default function PageHttpGet() {
       }
     }
     fetchData();
-  }, [profileUrl, profile, setProfile]);
+  }, [profileUrl]);
 
   if (!profile) {
     return <p>Loading or File Missing...</p>;
