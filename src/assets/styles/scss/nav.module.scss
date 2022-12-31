@@ -1,0 +1,44 @@
+.navLogo {
+  height: 3rem;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  margin-left: 2rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .navLogo {
+    animation: navLogoSpin infinite 5s linear;
+  }
+}
+
+.navHeader {
+  background-color: rgb(34, 60, 112, 0.6);
+  width: 100vw;
+  max-height: 12vh;
+  display: flex;
+  position: fixed;
+  top: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLink {
+  max-height: 8vh;
+  color: #61dafb;
+  background-color: rgb(0, 0, 0, 0.4);
+  padding: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 1.5rem;
+}
+
+@keyframes navLogoSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

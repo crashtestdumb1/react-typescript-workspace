@@ -1,11 +1,11 @@
 import { createRoot } from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
 import { getChainOptions, WalletProvider } from '@terra-money/wallet-provider';
+import { BrowserRouter } from 'react-router-dom';
 
-import '@css/index.css';
+import '@scss/app.module.scss';
 import App from '@layouts/App';
 //import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);

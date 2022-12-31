@@ -1,0 +1,111 @@
+:root {
+    --display-menu-main: 945px;
+    --display-menu-left: 945px;
+
+    --theme-bg-color: rgba(8, 6, 11, 0.5);
+    --theme-bg-content: rgba(8, 6, 11, 0.2);
+    --theme-bg-header: rgb(39, 45, 64, 0.2);
+    --theme-bg-footer: --theme-bg-header;
+
+    --theme-bg-image: radial-gradient(ellipse at bottom, var(--theme-color-darkest) 0%, var(--theme-color-black) 100%);
+    --theme-bg-filter: drop-shadow(0 0 10px var(--theme-gray-dark));
+
+    //    --theme-bg-image: url(https://c4.wallpaperflare.com/wallpaper/624/781/96/blacksmith-embers-mallet-tools-wallpaper-preview.jpg);
+    /*
+        --theme-bg-image: linear-gradient(
+            135deg,
+            #5f7999 10%,
+            #1f1152 100%
+           );
+    */
+
+    --theme-color: var(--theme-text);
+    --theme-inactive-color: rgb(113 119 144 / 78%);
+    --theme-brand-color: #d8552a;
+    --theme-enhanced-color: #f37402;
+    --theme-special-color: #f4bf62;
+    --theme-create-color: #deb629;
+
+    --theme-link-color: rgba(208, 199, 130, 0.78);
+    --theme-button-bg: #144378;
+
+    --theme-border-radius: 1rem;
+    --theme-border-color: var(--theme-inactive-color);
+    --theme-border-width: 0.2rem;
+    --theme-border-style: solid;
+
+    --theme-color-black: #090a0f;
+    --theme-color-darkest: #1b2735;
+    --theme-color-darker: #5f7999;
+    --theme-color-dark: #83aee1;
+    --theme-color-base: #f37402;
+    --theme-color-light: #f4bf62;
+    --theme-color-lighter: #EDD892;
+    --theme-color-lightest: #f9fafb;
+
+    --theme-gray-darker: #3f3f40;
+    --theme-gray-dark: #6d7989;
+    --theme-gray-base: #aebbcd;
+    --theme-gray-light: #a9aea9;
+    --theme-gray-ligher: #c5c6c7;
+
+    --theme-text: #f9fafb;
+    --theme-text2: #29dec6;
+    --theme-text3: #ff2c45;
+
+    --theme-heading-text: var(--theme-text);
+    --theme-heading-bg-gradient: linear-gradient(
+        135deg,
+        #5f7999 10%,
+        #1f1152 100%
+       );
+
+    --theme-brand-shade1: #b7380f;
+    --theme-brand-shade2: #961800;
+    --theme-brand-shade3: #760000;
+    --theme-brand-shade4: #5a0000;
+
+    --theme-brand-spot1: #e6a58e;
+    --theme-brand-spot2: #ffe6d6;
+    --theme-brand-spot3: #83aee1;
+
+    --theme-brand-twisted1: #83aee1;
+    --theme-brand-twisted2: #d9f3ff;
+    --theme-brand-twisted3: #5f7999;
+
+    --theme-pallete-a1: #d8552a;
+
+    --body-font: "Poppins", sans-serif;  // overridden by Chakra themes/yfd.tsx
+    --hover-menu-bg: rgba(255, 255, 255, 0.3);
+
+    --content-title-color: #999ba5;
+    --content-text: #ebecec;
+    --content-bg: rgb(146 151 179 / 13%);
+
+    --icon-color: var(--theme-color);
+    --icon-special-color: var(--theme-special-color);
+
+    --button-standard-color: #fff;
+    --button-standard-bg: var(--theme-button-bg); // #3a6df0
+    --button-standard-not-open-bg: #1e59f1;
+    --button-disable-bg: var(--theme-inactive-color);
+    --button-special-bg: var(--theme-special-color);
+    --button-create-color: var(#000);
+    --button-create-bg: var(--theme-create-color);
+    --button-inactive: rgb(249 250 251 / 55%);
+
+    --dropdown-bg: #21242d;
+    --dropdown-hover: rgb(42 46 60);
+    --popup-bg: rgb(22 25 37);
+    --search-bg: #14162b;
+    --overlay-bg: rgba(36, 39, 59, 0.3);
+    --scrollbar-bg: rgb(1 2 3 / 40%);
+    --notification-bg: var(--button-standard-bg);
+    --proposal-list-item-color: red;
+
+    --text-enhanced-color: var(--theme-enhanced-color);
+    --text-enhanced-filter-color: #fff;
+
+    --text-menu-title-color: var(--text-enhanced-color);
+    --text-menu-link-color: var(--theme-link-color);
+}
