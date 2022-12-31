@@ -26,6 +26,11 @@ const navLinks = [
     href: "/fetch"
   },
   {
+    label: "Axios",
+    icon: "web_asset",
+    href: "/axios"
+  },
+  {
     label: "Array",
     icon: "list",
     href: "/array"

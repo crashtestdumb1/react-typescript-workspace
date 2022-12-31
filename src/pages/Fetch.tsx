@@ -1,41 +1,50 @@
 import { useConnectedWallet } from '@terra-money/wallet-provider';
 import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import React, { useEffect } from 'react';
-import styles from '@scss/app.module.scss';
-import axios from 'axios'
-import { arrayBuffer } from 'node:stream/consumers';
+import { useState, useEffect } from 'react';
+import { walletAddress, profileState } from 'recoil/atoms';
+import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
 
-export const PATH_PROFILE =
-  'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/';
-export const PATH_PROFILE_PFP = 'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/pfp/';
-export const PATH_PROFILE_PFP_DEFAULT = 'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/pfp/default.png';
-export const PATH_PROFILE_SUFFIX = '.json';
-export const PATH_PROFILE_PFP_SUFFIX = '.png';
-export const PATH_TEST = 'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/terra1upleyfx24jehpgfy9d79d9scps20ffuf6vy706.json';
+// use local state to store profile data gathered from a remote JSON file via HTTP GET (fetch)
 
-const dataState = atom({
-  key: 'dataState',
-  default: {},
-});
+type FetchJson = {
+  [key: string]: string | Array<{ [key: string]: string }>;
+  name: string;
+  address: string;
+  platform_preference: string;
+  platforms: Array<{
+    email: string;
+    keybase: string;
+    instagram: string;
+    twitter: string;
+    discord: string;
+    telegram: string;
+    github: string;
+  }>;
+};
 
-const walletAddress = atom({
-  key: 'walletAddress',
-  default: ''
-})
+const initialFetchJson: FetchJson = {
+    name: '',
+    address: '',
+    platform_preference: '',
+    platforms: [
+      {
+        email: '',
+        keybase: '',
+        instagram: '',
+        twitter: '',
+        discord: '',
+        telegram: '',
+        github: ''
+      }]
+};
 
 export default function PageHttpGet() {
+  const [fetchJson, setFetchJson] = useState<FetchJson>(initialFetchJson);
+  const [error, setError] = useState(null);
+
   const setWalletAddress = useSetRecoilState(walletAddress);
   const connectedWallet = useConnectedWallet();
-  const [data, setData] = useRecoilState(dataState);
 
-  useEffect(() => {
-  
-    if (connectedWallet !== undefined) {
-      setWalletAddress(connectedWallet?.walletAddress);
-    }
-  }, [connectedWallet, setWalletAddress]);
-
-  
   console.log('connectedWallet: ' + connectedWallet);
 
   const address = connectedWallet?.walletAddress;
@@ -44,41 +53,56 @@ export default function PageHttpGet() {
   console.log('profileUrl: ' + profileUrl);
   console.log('profilePfpUrl: ' + profilePfpUrl);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(profileUrl, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if(response.data.profile) {
-          console.dir('response.data.profile: ' + JSON.stringify(response.data.profile));
-          setData(response.data.profile);
-        } else {
-          console.error('profile data missing');
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  const fetchData = async () => {
+    try {
+      const response = await fetch(profileUrl);
+      const data = await response.json();
+      console.log('json data', data.profile);
+      setFetchJson(data.profile);
+      console.log('fetchJson', fetchJson);
+    } catch (error) {
+      console.log(error);
     }
-    fetchData();
-  }, []);
+  };
+  fetchData();
 
-  if (!data) {
+  if (!fetchJson) {
     return <p>Loading or File Missing...</p>;
+  } else {
+    const platforms: { [key: string]: string } = fetchJson['platforms'];
   }
 
   return (
     <div>
-      <h1>Fetched Profile Data</h1>
-      {data && (
-        <p>
-          {JSON.stringify(data)}
-          <br />
-        </p>
-      )}
+      <p>Profile</p>
+      {fetchJson && /*
+        <ul>
+          <li>Name: {fetchJson.name}</li>
+          <li>Address: {fetchJson.address}</li>
+          <li>Platform Preference: {fetchJson.platform_preference}</li>
+          <li>Platforms:</li>
+          <ul>
+            <li>Email: {platforms['email']}</li>
+            <li>Keybase: {fetchJson['platforms']['keybase']}</li>
+            <li>Instagram: {fetchJson['platforms']['instagram']}</li>
+            <li>Twitter: {fetchJson['platforms']['twitter']}</li>
+            <li>Discord: {fetchJson['platforms']['discord']}</li>
+            <li>Telegram: {fetchJson['platforms']['telegram']}</li>
+            <li>Github: {fetchJson['platforms']['github']}</li>
+
+          </ul>
+        </ul>
+  */ 
+        <ul>
+        <>
+          {Object.keys(fetchJson).map((key) => (
+            <li>
+              {key}: {fetchJson[key]}
+            </li>
+          ))}
+        </>
+      </ul>
+  }
     </div>
   );
-
-}
+};

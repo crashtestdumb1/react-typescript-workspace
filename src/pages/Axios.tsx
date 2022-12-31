@@ -1,6 +1,6 @@
 import { useConnectedWallet } from '@terra-money/wallet-provider';
 import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styles from '@scss/app.module.scss';
 import axios from 'axios'
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
@@ -104,17 +104,9 @@ export default function PageHttpGet() {
   }
 
   return (
-    <div>Profile
-      <br />
-      Wallet Address: {address}
-      <br /><br />
-      Profile URL: {profileUrl}
-      <br /><br />
-      Profile PFP URL: {profilePfpUrl}
+    <div>Axios Test
       {profile && (
         <p>
-          <img src={profilePfpUrl} className={styles.profileImage} alt="profile" />
-          <br />
           <h1>{ profile.name } </h1>
           <img src={profilePfpUrl} alt="pfp" width="75px" />
           <p> 

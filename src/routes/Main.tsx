@@ -8,6 +8,7 @@ import PageProfile from '@pages/Profile';
 import Properties from '@pages/Properties';
 import Form from '@pages/Form';
 import PageArray from '@pages/Array';
+import PageAxios from '@pages/Axios';
 import PageFetch from '@pages/Fetch';
 import PageState from '@pages/State';
 import PageRecoil from '@pages/Recoil';
@@ -22,6 +23,7 @@ export default function MainRoutes() {
       <Route path='/props' element={<Properties />}></Route>
       <Route path='/form' element={<Form />}></Route>
       <Route path='/array' element={<PageArray />}></Route>
+      <Route path='/axios' element={<PageAxios />}></Route>
       <Route path='/fetch' element={<PageFetch />}></Route>
       <Route path='/state' element={<PageState />}></Route>
       <Route path='/recoil' element={<PageRecoil />}></Route>
