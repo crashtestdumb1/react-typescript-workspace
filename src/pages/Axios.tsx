@@ -57,19 +57,17 @@ export default function PageHttpGet() {
           },
         });
         if(response.data.profile) {
-          console.dir('response.data.profile: ' + JSON.stringify(response.data.profile));
           setMyProfile(response.data.profile);
           if(response.data.profile.platform_preference) {
-            console.log('preferred platform from json', response.data.profile.platform_preference);
+            setMyProfile(prevMyProfile => ({ ...prevMyProfile, ...response.data.profile}));
             setMyPlatformPreference(response.data.profile.platform_preference);
-            console.log('platformPreference: ' + myPlatformPreference);
             const platformAddress = response.data.profile.platforms[myPlatformPreference];
-            console.log('platformAddress: ' + platformAddress);
             setMyProfile(prevMyProfile => ({
               ...prevMyProfile, platformAddress: platformAddress
             }));
+            console.dir('profile after updates: ' + JSON.stringify(myProfile));
           } else {
-            const platformPreference = 'none';
+            const myPlatformPreference = 'none';
           }
         } else {
           console.error('profile data missing');
