@@ -1,7 +1,7 @@
 import { useConnectedWallet } from '@terra-money/wallet-provider';
-import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import { useState, useEffect } from 'react';
-import { walletAddress, profileState } from 'recoil/atoms';
+import { useSetRecoilState } from 'recoil';
+import { useState } from 'react';
+import { walletAddress } from 'recoil/atoms';
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
 
 // use local state to store profile data gathered from a remote JSON file via HTTP GET (fetch)
@@ -69,39 +69,27 @@ export default function PageHttpGet() {
   if (!fetchJson) {
     return <p>Loading or File Missing...</p>;
   } else {
-    const platforms: { [key: string]: string } = fetchJson['platforms'];
   }
 
   return (
     <div>
       <p>Profile</p>
-      {fetchJson && /*
+      {fetchJson && 
         <ul>
           <li>Name: {fetchJson.name}</li>
           <li>Address: {fetchJson.address}</li>
           <li>Platform Preference: {fetchJson.platform_preference}</li>
           <li>Platforms:</li>
-          <ul>
-            <li>Email: {platforms['email']}</li>
-            <li>Keybase: {fetchJson['platforms']['keybase']}</li>
-            <li>Instagram: {fetchJson['platforms']['instagram']}</li>
-            <li>Twitter: {fetchJson['platforms']['twitter']}</li>
-            <li>Discord: {fetchJson['platforms']['discord']}</li>
-            <li>Telegram: {fetchJson['platforms']['telegram']}</li>
-            <li>Github: {fetchJson['platforms']['github']}</li>
-
-          </ul>
-        </ul>
-  */ 
         <ul>
         <>
           {Object.keys(fetchJson).map((key) => (
             <li>
-              {key}: {fetchJson[key]}
+              <>{key}: {fetchJson[key]}</>
             </li>
           ))}
         </>
       </ul>
+    </ul>
   }
     </div>
   );

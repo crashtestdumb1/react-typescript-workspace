@@ -1,6 +1,6 @@
 import { useConnectedWallet } from '@terra-money/wallet-provider';
-import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import { useState, useEffect } from 'react';
+import { atom, useSetRecoilState, useRecoilState } from 'recoil';
+import { useEffect } from 'react';
 import styles from '@scss/app.module.scss';
 import axios from 'axios'
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
@@ -48,19 +48,16 @@ const profileState = atom<Profile>({
 
 export default function PageHttpGet() {
   const [profile, setProfile] = useRecoilState(profileState);
-
   const setWalletAddress = useSetRecoilState(walletAddress);
   const connectedWallet = useConnectedWallet();
 
+  console.log('connectedWallet: ' + JSON.stringify(connectedWallet));
   useEffect(() => {
   
     if (connectedWallet !== undefined) {
       setWalletAddress(connectedWallet?.walletAddress);
     }
   }, [connectedWallet, setWalletAddress]);
-
-  
-  console.log('connectedWallet: ' + connectedWallet);
 
   const address = connectedWallet?.walletAddress;
   const profileUrl = PATH_PROFILE + address + PATH_PROFILE_SUFFIX;
@@ -80,14 +77,10 @@ export default function PageHttpGet() {
           console.dir('response.data.profile: ' + JSON.stringify(response.data.profile));
           setProfile(response.data.profile);
           if(response.data.profile.platform_preference) {
-            console.log('preferred platform', response.data.profile.platform_preference);
             const platformPreference = response.data.profile.platform_preference;
-            const platformAddress = 'none';
-            setProfile({...profile,
-                platformAddress: response.data.profile.platforms[platformPreference]
-            });
-          } else {
-            const platformPreference = 'none';
+            console.log('preferred platform', platformPreference);
+            setProfile(profile => ({...profile, platformAddress: response.data.profile.platforms[platformPreference]}));
+            console.log('profile with platformAddress', profile);
           }
         } else {
           console.error('profile data missing');
@@ -97,35 +90,36 @@ export default function PageHttpGet() {
       }
     }
     fetchData();
-  }, [profileUrl, setProfile]);
+  }, [profileUrl, profile, setProfile]);
 
   if (!profile) {
     return <p>Loading or File Missing...</p>;
   }
-
+  const platformPreference = profile.platform_preference.charAt(0).toUpperCase() + profile.platform_preference.slice(1);
   return (
-    <div>Profile
+    <div>
+      {profile && (
+        <p>
+          <img src={profilePfpUrl} className={styles.profileImage} alt="profile" />
+          <br />
+          <h1>{ profile.name } </h1>
+          <p> 
+            { platformPreference }
+             {' '}is your preferred platform 
+            <br />
+            with identifier: <a href={ 'https://twitter.com/' + profile.platformAddress } rel="noreferrer" target="_blank">{ profile.platformAddress }</a>
+            <br />
+          </p>
+        </p>
+      )}
+      <br />
+      Profile
       <br />
       Wallet Address: {address}
       <br /><br />
       Profile URL: {profileUrl}
       <br /><br />
       Profile PFP URL: {profilePfpUrl}
-      {profile && (
-        <p>
-          <img src={profilePfpUrl} className={styles.profileImage} alt="profile" />
-          <br />
-          <h1>{ profile.name } </h1>
-          <img src={profilePfpUrl} alt="pfp" width="75px" />
-          <p> 
-            { profile.platform_preference } is your preferred platform 
-            <br />
-            with address: { profile.platformAddress }
-            <br />
-          </p>
-          <br />
-        </p>
-      )}
     </div>
   );
 
