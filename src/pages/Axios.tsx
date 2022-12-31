@@ -1,16 +1,11 @@
-import { useConnectedWallet } from '@terra-money/wallet-provider';
 import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '@scss/app.module.scss';
 import axios from 'axios'
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
+import useWallet from '@hooks/useWallet';
 
-const walletAddress = atom({
-  key: 'walletAddress',
-  default: ''
-})
-
-type Profile = {
+type MyProfile = {
   name: string;
   address: string;
   platform_preference: string;
@@ -26,9 +21,7 @@ type Profile = {
   }>;
 };
 
-const profileState = atom<Profile>({
-  key: 'profileState',
-  default: {
+const myProfileState: MyProfile = {
     name: '',
     address: '',
     platform_preference: '',
@@ -43,28 +36,15 @@ const profileState = atom<Profile>({
         telegram: '',
         github: ''
       }]
-  }
-});
+};
 
 export default function PageHttpGet() {
-  const [profile, setProfile] = useRecoilState(profileState);
+  const address = useWallet();
 
-  const setWalletAddress = useSetRecoilState(walletAddress);
-  const connectedWallet = useConnectedWallet();
-
-  useEffect(() => {
-  
-    if (connectedWallet !== undefined) {
-      setWalletAddress(connectedWallet?.walletAddress);
-    }
-  }, [connectedWallet, setWalletAddress]);
-
-  
-  console.log('connectedWallet: ' + connectedWallet);
-
-  const address = connectedWallet?.walletAddress;
+  const [myProfile, setMyProfile] = useState(myProfileState);
   const profileUrl = PATH_PROFILE + address + PATH_PROFILE_SUFFIX;
   const profilePfpUrl = PATH_PROFILE_PFP + address + PATH_PROFILE_PFP_SUFFIX;
+  const [myPlatformPreference, setMyPlatformPreference] = useState('');
   console.log('profileUrl: ' + profileUrl);
   console.log('profilePfpUrl: ' + profilePfpUrl);
 
@@ -78,14 +58,16 @@ export default function PageHttpGet() {
         });
         if(response.data.profile) {
           console.dir('response.data.profile: ' + JSON.stringify(response.data.profile));
-          setProfile(response.data.profile);
+          setMyProfile(response.data.profile);
           if(response.data.profile.platform_preference) {
-            console.log('preferred platform', response.data.profile.platform_preference);
-            const platformPreference = response.data.profile.platform_preference;
-            const platformAddress = 'none';
-            setProfile({...profile,
-                platformAddress: response.data.profile.platforms[platformPreference]
-            });
+            console.log('preferred platform from json', response.data.profile.platform_preference);
+            setMyPlatformPreference(response.data.profile.platform_preference);
+            console.log('platformPreference: ' + myPlatformPreference);
+            const platformAddress = response.data.profile.platforms[myPlatformPreference];
+            console.log('platformAddress: ' + platformAddress);
+            setMyProfile(prevMyProfile => ({
+              ...prevMyProfile, platformAddress: platformAddress
+            }));
           } else {
             const platformPreference = 'none';
           }
@@ -97,22 +79,22 @@ export default function PageHttpGet() {
       }
     }
     fetchData();
-  }, [profileUrl, setProfile]);
+  }, [profileUrl]);
 
-  if (!profile) {
+  if (!myProfile) {
     return <p>Loading or File Missing...</p>;
   }
 
   return (
     <div>Axios Test
-      {profile && (
+      {myProfile && (
         <p>
-          <h1>{ profile.name } </h1>
-          <img src={profilePfpUrl} alt="pfp" width="75px" />
+          <h1>{ myProfile.name } </h1>
+          <img src={profilePfpUrl} alt="pfp" width="100px" />
           <p> 
-            { profile.platform_preference } is your preferred platform 
+            { myPlatformPreference } is your preferred platform 
             <br />
-            with address: { profile.platformAddress }
+            with address: { myProfile.platformAddress }
             <br />
           </p>
           <br />

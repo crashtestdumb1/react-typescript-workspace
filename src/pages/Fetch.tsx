@@ -1,7 +1,5 @@
-import { useConnectedWallet } from '@terra-money/wallet-provider';
-import { useSetRecoilState } from 'recoil';
 import { useState } from 'react';
-import { walletAddress } from 'recoil/atoms';
+import useWallet from '@hooks/useWallet';
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
 
 // use local state to store profile data gathered from a remote JSON file via HTTP GET (fetch)
@@ -40,12 +38,8 @@ const initialFetchJson: FetchJson = {
 
 export default function PageHttpGet() {
   const [fetchJson, setFetchJson] = useState<FetchJson>(initialFetchJson);
-
-  const connectedWallet = useConnectedWallet();
-
-  console.log('connectedWallet: ' + connectedWallet);
-
-  const address = connectedWallet?.walletAddress;
+  //const address = useWallet();
+  const address = "terra1upleyfx24jehpgfy9d79d9scps20ffuf6vy706";
   const profileUrl = PATH_PROFILE + address + PATH_PROFILE_SUFFIX;
   const profilePfpUrl = PATH_PROFILE_PFP + address + PATH_PROFILE_PFP_SUFFIX;
   console.log('profileUrl: ' + profileUrl);
@@ -62,7 +56,7 @@ export default function PageHttpGet() {
       console.log(error);
     }
   };
-  fetchData();
+//fetchData();
 
   if (!fetchJson) {
     return <p>Loading or File Missing...</p>;
@@ -79,12 +73,8 @@ export default function PageHttpGet() {
           <li>Platform Preference: {fetchJson.platform_preference}</li>
           <li>Platforms:</li>
         <ul>
+          <li> work in progress here... </li>
         <>
-          {Object.keys(fetchJson).map((key) => (
-            <li>
-              <>{key}: {fetchJson[key]}</>
-            </li>
-          ))}
         </>
       </ul>
     </ul>

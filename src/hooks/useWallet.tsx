@@ -11,10 +11,11 @@ export default function useWallet() {
     useEffect(() => {
 
         if (connectedWallet !== undefined) {
+            console.log('Connecting New Wallet');
             setWalletAddress(connectedWallet?.walletAddress);
         }
 
     }, [connectedWallet, setWalletAddress]);
-
+    console.log('walletAddress: ' + JSON.stringify(walletAddress));
     return connectedWallet?.walletAddress;
 }
