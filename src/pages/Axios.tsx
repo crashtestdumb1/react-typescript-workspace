@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useConnectedWallet } from '@terra-money/wallet-provider';
+import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
+import React, { useEffect } from 'react';
+import styles from '@scss/app.module.scss';
 import axios from 'axios'
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
-import useWallet from '@hooks/useWallet';
-import { walletAddress } from '@recoil/atoms';
 
-type MyProfile = {
+const walletAddress = atom({
+  key: 'walletAddress',
+  default: ''
+})
+
+type Profile = {
   name: string;
   address: string;
   platform_preference: string;
@@ -20,7 +26,9 @@ type MyProfile = {
   }>;
 };
 
-const myProfileState: MyProfile = {
+const profileState = atom<Profile>({
+  key: 'profileState',
+  default: {
     name: '',
     address: '',
     platform_preference: '',
@@ -35,16 +43,28 @@ const myProfileState: MyProfile = {
         telegram: '',
         github: ''
       }]
-};
+  }
+});
 
 export default function PageHttpGet() {
-  const address = useWallet();
-  console.log('axios test wallet: ' + address);
+  const [profile, setProfile] = useRecoilState(profileState);
 
-  const [myProfile, setMyProfile] = useState(myProfileState);
+  const setWalletAddress = useSetRecoilState(walletAddress);
+  const connectedWallet = useConnectedWallet();
+
+  useEffect(() => {
+  
+    if (connectedWallet !== undefined) {
+      setWalletAddress(connectedWallet?.walletAddress);
+    }
+  }, [connectedWallet, setWalletAddress]);
+
+  
+  console.log('connectedWallet: ' + connectedWallet);
+
+  const address = connectedWallet?.walletAddress;
   const profileUrl = PATH_PROFILE + address + PATH_PROFILE_SUFFIX;
   const profilePfpUrl = PATH_PROFILE_PFP + address + PATH_PROFILE_PFP_SUFFIX;
-  const [myPlatformPreference, setMyPlatformPreference] = useState('');
   console.log('profileUrl: ' + profileUrl);
   console.log('profilePfpUrl: ' + profilePfpUrl);
 
@@ -57,15 +77,17 @@ export default function PageHttpGet() {
           },
         });
         if(response.data.profile) {
-          setMyProfile(response.data.profile);
+          console.dir('response.data.profile: ' + JSON.stringify(response.data.profile));
+          setProfile(response.data.profile);
           if(response.data.profile.platform_preference) {
-            setMyProfile(prevMyProfile => ({ ...prevMyProfile, ...response.data.profile}));
-            setMyPlatformPreference(response.data.profile.platform_preference);
-            const platformAddress = response.data.profile.platforms[myPlatformPreference];
-            setMyProfile(prevMyProfile => ({
-              ...prevMyProfile, platformAddress: platformAddress
-            }));
-            console.dir('profile after updates: ' + JSON.stringify(myProfile));
+            console.log('preferred platform', response.data.profile.platform_preference);
+            const platformPreference = response.data.profile.platform_preference;
+            const platformAddress = 'none';
+            setProfile({...profile,
+                platformAddress: response.data.profile.platforms[platformPreference]
+            });
+          } else {
+            const platformPreference = 'none';
           }
         } else {
           console.error('profile data missing');
@@ -75,22 +97,22 @@ export default function PageHttpGet() {
       }
     }
     fetchData();
-  });
+  }, [profileUrl, setProfile]);
 
-  if (!myProfile) {
+  if (!profile) {
     return <p>Loading or File Missing...</p>;
   }
 
   return (
     <div>Axios Test
-      {myProfile && (
+      {profile && (
         <p>
-          <h1>{ myProfile.name } </h1>
-          <img src={profilePfpUrl} alt="pfp" width="100px" />
+          <h1>{ profile.name } </h1>
+          <img src={profilePfpUrl} alt="pfp" width="75px" />
           <p> 
-            { myPlatformPreference } is your preferred platform 
+            { profile.platform_preference } is your preferred platform 
             <br />
-            with address: { myProfile.platformAddress }
+            with address: { profile.platformAddress }
             <br />
           </p>
           <br />

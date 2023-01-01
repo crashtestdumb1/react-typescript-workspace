@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import { useConnectedWallet } from '@terra-money/wallet-provider';
+import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
+import React, { useState, useEffect } from 'react';
 import { Text } from '@chakra-ui/react';
+import styles from '@scss/app.module.scss';
+import axios from 'axios'
+import { render } from '@testing-library/react';
 
 export const PATH_PROFILE =
   'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/';
@@ -8,6 +13,12 @@ export const PATH_PROFILE_PFP_DEFAULT = 'https://y-foundry-dao.github.io/yfd-dap
 export const PATH_PROFILE_SUFFIX = '.json';
 export const PATH_PROFILE_PFP_SUFFIX = '.png';
 export const PATH_TEST = 'https://y-foundry-dao.github.io/yfd-dapp-profiles/profile/terra1upleyfx24jehpgfy9d79d9scps20ffuf6vy706.json';
+
+
+const dataState = atom({
+  key: 'dataState',
+  default: {},
+});
 
 const MyForm = () => {
   const [formState, setFormState] = useState({
