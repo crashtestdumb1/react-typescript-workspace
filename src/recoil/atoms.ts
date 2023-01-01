@@ -4,7 +4,7 @@ import { atom } from 'recoil';
 export const walletAddress = atom({
     key: 'walletAddress',
     default: ''
-  })
+  });
   
   type Profile = {
     name: string;

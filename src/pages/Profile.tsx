@@ -1,16 +1,11 @@
-import { useEffect } from 'react';
-import { atom, useSetRecoilState, useRecoilState } from 'recoil';
-import styles from '@scss/app.module.scss';
 
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
-import { profileState } from '@recoil/atoms';
 import useWallet from '@hooks/useWallet';
+import useProfile from '@hooks/useProfile';
 
 export default function PageHttpGet() {
   const address = useWallet();
-  console.log ('connected wallet address: ' + address);
-
-  const [profile, setProfile] = useRecoilState(profileState);
+  const profile = useProfile(address) as any;
   console.log ('loaded profile: ' + JSON.stringify(profile));
 
   const profileUrl = PATH_PROFILE + address + PATH_PROFILE_SUFFIX;
@@ -23,8 +18,9 @@ export default function PageHttpGet() {
   return (
     <div>
       <br />
-      Profile
+      <h1>Attached Wallet Profile</h1>
       <br />
+      <h2>{ profile.name }</h2>
       Wallet Address: {address}
       <br /><br />
       Profile URL: {profileUrl}

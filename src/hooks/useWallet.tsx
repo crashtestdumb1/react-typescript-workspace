@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { atom, useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { useConnectedWallet } from '@terra-money/wallet-provider';
 import { walletAddress } from '@recoil/atoms';
 
@@ -11,8 +11,10 @@ export default function useWallet() {
     useEffect(() => {
 
         if (connectedWallet !== undefined) {
-            console.log('Connecting New Wallet');
+            console.log('Connected Wallet');
             setWalletAddress(connectedWallet?.walletAddress);
+        } else {
+            console.log('No Wallet Connected');
         }
 
     }, [connectedWallet, setWalletAddress]);

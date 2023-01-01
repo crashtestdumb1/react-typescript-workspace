@@ -1,9 +1,8 @@
-import { atom, useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 import React, { useState, useEffect } from 'react';
-import styles from '@scss/app.module.scss';
 import axios from 'axios'
 import { PATH_PROFILE, PATH_PROFILE_PFP, PATH_PROFILE_PFP_SUFFIX, PATH_PROFILE_SUFFIX } from 'utilities/variables';
 import useWallet from '@hooks/useWallet';
+import { walletAddress } from '@recoil/atoms';
 
 type MyProfile = {
   name: string;
@@ -40,6 +39,7 @@ const myProfileState: MyProfile = {
 
 export default function PageHttpGet() {
   const address = useWallet();
+  console.log('axios test wallet: ' + address);
 
   const [myProfile, setMyProfile] = useState(myProfileState);
   const profileUrl = PATH_PROFILE + address + PATH_PROFILE_SUFFIX;
@@ -66,8 +66,6 @@ export default function PageHttpGet() {
               ...prevMyProfile, platformAddress: platformAddress
             }));
             console.dir('profile after updates: ' + JSON.stringify(myProfile));
-          } else {
-            const myPlatformPreference = 'none';
           }
         } else {
           console.error('profile data missing');
@@ -77,7 +75,7 @@ export default function PageHttpGet() {
       }
     }
     fetchData();
-  }, [profileUrl]);
+  });
 
   if (!myProfile) {
     return <p>Loading or File Missing...</p>;
